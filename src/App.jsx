@@ -11,10 +11,10 @@ const App = () => {
   const { name, job, image, text } = people[index]
 
   const checkNumber = (number) => {
-    if (newIndex > people.length - 1) {
+    if (number > people.length - 1) {
       return 0
     }
-    if (newIndex < 0) {
+    if (number < 0) {
       return people.length - 1
     }
     return number
@@ -31,8 +31,16 @@ const App = () => {
       const newIndex = currentIndex - 1;
       return checkNumber(newIndex)
     })
-  }
+  };
 
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * people.length);
+    if (randomNumber === index) {
+      randomNumber = index + 1
+    }
+    setIndex(checkNumber(randomNumber)); 
+  }
+  
   return (
     <main>
       <article className="review">
@@ -53,6 +61,9 @@ const App = () => {
             <FaChevronCircleRight />
           </button>
         </div>
+        <button className="btn btn-hipster" onClick={randomPerson}>
+          surprise me
+        </button>
       </article>
     </main>
   )
